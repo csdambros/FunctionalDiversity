@@ -1,4 +1,3 @@
-
 # Recreates the functional beta part function from the package betapart in R (Baselga et al. 2017) in order to run much faster.
 # The script also implements methods to plot communities in 2d and 3d functional spaces
 # Author: CSDambros
