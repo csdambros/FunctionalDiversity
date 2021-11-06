@@ -1,4 +1,15 @@
 # Recreates the functional beta part function from the package betapart in R (Baselga et al. 2017) in order to run much faster.
+
+# Most of the code is a copy of the original functions from the betapart package. Other parts of the core functions have been modified. The modifications are mostly:
+# 1. The temporary files are saved in the temporary files of the computer system and not stored in the personal folder of the user. Therefore, no files are created in the working directory. This has minor effect for most users, but can greatly improve performance if:
+# 1.1 the temporary computer folder is in a Solid State Drive and the user directory is in a separate Hard Drive
+# 1.2 if the working directory is in an external drive (eg. pendrive)
+# 1.3 if the user is outsourcing the analyses in a computer cluster/server
+
+# 2. For beta diversity calculations, the analyses were divided into 2 steps. In the first step, multidimensional space of each community is calculated and stored. In the second step, each pair of multidimensional space is compared. This avoids running multiple times the slow calculations of multifunctional space. This represents a very big performance improvement, especially when many communities are used. In the original betapart functions, processor time grows exponentially with the number of communities, whereas in this new implementation, time grows almost linearly. In some scenarios, the differences can be of many orders of magnitude (e.g. minutes vs days).
+
+# The script also implements methods to calculate similarities in parallel using multiple computer processors (typically from 4 to 16x faster) or in a computer cluster (up to hundreds of times faster).
+
 # The script also implements methods to plot communities in 2d and 3d functional spaces
 # Author: CSDambros
 
